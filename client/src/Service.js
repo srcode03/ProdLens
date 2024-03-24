@@ -25,6 +25,29 @@ function Service() {
   const [data, setData] = useState([]);
   const [serviceName, setServiceName] = useState("");
   const context = useContext(StepContext);
+  const [context1, setcontext1] = useState({
+    name: "",
+    email: "",
+    password: "",
+    cpassword: "",
+  });
+  const [duration, setduration] = useState("");
+  const [no, setno] = useState("");
+  const [revenue, setrevenue] = useState("");
+  const handledurationChange = (e) => {
+    setduration(e.target.value);
+  };
+
+  // Handle password input change
+  const handleno = (e) => {
+    setno(e.target.value);
+  };
+
+  // Handle confirm password input change
+  const handlerevenue = (e) => {
+    setrevenue(e.target.value);
+  };
+
   const [selectedCategory, setSelectedCategory] = useState("");
   const categories = Array.from(
     new Set(initialCards.map((card) => card.category))
@@ -74,6 +97,11 @@ function Service() {
     showpred(false);
     showkey(true);
   };
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [avatar, setAvatar] = useState(null);
 
   return (
     <div className="outer">
@@ -142,109 +170,75 @@ function Service() {
                   Or
                 </strong>
               </div>
-              <form
-                style={{
-                  maxWidth: "500px",
-                  margin: "0 auto",
-                  background: "#ffffff",
-                  padding: "30px",
-                  borderRadius: "10px",
-                  boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.1)",
-                  border: "1px solid #e5e5e5",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "20px",
-                }}
-              >
-                <h2
-                  style={{
-                    textAlign: "center",
-                    fontSize: "24px",
-                    marginBottom: "20px",
-                    color: "#333333",
-                  }}
-                >
-                  Fill in the Details
-                </h2>
-                <div
-                  className="form-group"
-                  style={{ display: "flex", flexDirection: "column" }}
-                >
-                  <label
-                    htmlFor="exampleInputEmail1"
-                    style={{ marginBottom: "5px", color: "#555555" }}
-                  >
-                    Total No of Current Employees
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter email"
-                    style={{
-                      padding: "10px",
-                      borderRadius: "5px",
-                      border: "1px solid #cccccc",
-                    }}
-                  />
+              <form className="mt-8 space-y-6">
+                <div className="rounded-md shadow-lg bg-white p-6">
+                  {/* Email Input */}
+                  <div className="mb-4">
+                    <label
+                      htmlFor="email-address"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Revenue generated
+                    </label>
+                    <input
+                      id="email-address"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      value={revenue}
+                      onChange={handlerevenue}
+                      className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      placeholder="10,0000"
+                    />
+                  </div>
+                  {/* Password Input */}
+                  <div className="mb-4">
+                    <label
+                      htmlFor="password"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      No of employees
+                    </label>
+                    <input
+                      id="password"
+                      name="password"
+                      type="password"
+                      autoComplete="current-password"
+                      required
+                      value={no}
+                      onChange={handleno}
+                      className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      placeholder="10000"
+                    />
+                  </div>
+                  {/* Confirm Password Input */}
+                  <div className="mb-4">
+                    <label
+                      htmlFor="confirm-password"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Duration
+                    </label>
+                    <input
+                      id="confirm-password"
+                      name="confirm-password"
+                      type="password"
+                      autoComplete="current-password"
+                      value={duration}
+                      onChange={handledurationChange}
+                      className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      placeholder="3 years"
+                    />
+                  </div>
                 </div>
-                <div
-                  className="form-group"
-                  style={{ display: "flex", flexDirection: "column" }}
-                >
-                  <label
-                    htmlFor="exampleInputPassword1"
-                    style={{ marginBottom: "5px", color: "#555555" }}
+                <div>
+                  <button
+                    type="submit"
+                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
-                    Duration of Business
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="exampleInputPassword1"
-                    placeholder="Password"
-                    style={{
-                      padding: "10px",
-                      borderRadius: "5px",
-                      border: "1px solid #cccccc",
-                    }}
-                  />
+                    Submit
+                  </button>
                 </div>
-                <div
-                  className="form-group"
-                  style={{ display: "flex", flexDirection: "column" }}
-                >
-                  <label
-                    htmlFor="exampleInputPassword1"
-                    style={{ marginBottom: "5px", color: "#555555" }}
-                  >
-                    Revenue Generated:
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="exampleInputPassword1"
-                    placeholder="Password"
-                    style={{
-                      padding: "10px",
-                      borderRadius: "5px",
-                      border: "1px solid #cccccc",
-                    }}
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  style={{
-                    marginTop: "20px",
-                    padding: "10px 20px",
-                    backgroundColor: "#007bff",
-                    border: "none",
-                  }}
-                >
-                  Submit
-                </button>
               </form>
             </>
           )}
